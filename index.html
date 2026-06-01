@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio Saya - Neon Dark</title>
-    <!-- Mengambil font dari Google Fonts -->
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -17,14 +19,26 @@
             box-sizing: border-box;
         }
 
-        /* --- VARIABEL WARNA --- */
+        /* --- VARIABEL WARNA (Support Dark & Light Mode) --- */
         :root {
-            --bg-color: #0a0a0a;         /* Latar belakang sangat gelap */
-            --card-bg: #121212;          /* Sedikit lebih terang dari bg */
-            --neon-glow: #a500c7;        /* Warna glow lebih gelap */
-            --neon-purple: #d300ff;       /* Warna Ungu Neon Utama */
-            --text-white: #f0f0f0;       /* Putih bersih untuk teks */
-            --text-gray: #aaaaaa;        /* Abu-abu untuk teks sekunder */
+            --bg-color: #0a0a0a;
+            --card-bg: #121212;
+            --neon-glow: #a500c7;
+            --neon-purple: #d300ff;
+            --text-white: #f0f0f0;
+            --text-gray: #aaaaaa;
+            --border-color: #222;
+        }
+
+        /* Light Mode Variables */
+        [data-theme="light"] {
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+            --neon-glow: #7a00a0;
+            --neon-purple: #a000c0;
+            --text-white: #1a1a1a;
+            --text-gray: #555555;
+            --border-color: #ddd;
         }
 
         body {
@@ -32,13 +46,15 @@
             background-color: var(--bg-color);
             color: var(--text-white);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
             padding: 20px;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        /* --- KARTU PROFIL --- */
+        /* --- KONTENER UTAMA --- */
         .container {
             background-color: var(--card-bg);
             width: 100%;
@@ -46,8 +62,42 @@
             border-radius: 20px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(211, 0, 255, 0.1); /* Efek bayangan-redup */
-            border: 1px solid #222;
+            box-shadow: 0 0 20px rgba(211, 0, 255, 0.1);
+            border: 1px solid var(--border-color);
+            transition: all 0.5s ease;
+            
+            /* Animasi Entrance */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        /* --- ANIMASI ENTRANCE --- */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 15px var(--neon-purple), 0 0 30px var(--neon-purple);
+            }
+            50% {
+                box-shadow: 0 0 25px var(--neon-purple), 0 0 50px var(--neon-purple);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         /* --- FOTO PROFIL --- */
@@ -55,6 +105,10 @@
             position: relative;
             display: inline-block;
             margin-bottom: 20px;
+            
+            /* Animasi untuk gambar */
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
         }
 
         .profile-img {
@@ -63,8 +117,8 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--neon-purple);
-            /* Efek Neon bersinar di sekitar foto */
-            box-shadow: 0 0 15px var(--neon-purple), 0 0 30px var(--neon-purple); 
+            box-shadow: 0 0 15px var(--neon-purple), 0 0 30px var(--neon-purple);
+            animation: glowPulse 3s ease-in-out infinite;
         }
 
         /* --- TEKS --- */
@@ -74,6 +128,10 @@
             color: var(--text-white);
             text-transform: uppercase;
             letter-spacing: 2px;
+            
+            /* Animasi teks */
+            animation: fadeInUp 1s ease 0.5s forwards;
+            opacity: 0;
         }
 
         .tagline {
@@ -81,7 +139,11 @@
             font-weight: 700;
             font-size: 1rem;
             margin-bottom: 20px;
-            text-shadow: 0 0 10px var(--neon-purple); /* Efek text glow */
+            text-shadow: 0 0 10px var(--neon-purple);
+            
+            /* Animasi */
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
         }
 
         .bio {
@@ -89,13 +151,19 @@
             font-size: 0.9rem;
             line-height: 1.6;
             margin-bottom: 30px;
+            
+            /* Animasi */
+            animation: fadeInUp 1s ease 0.7s forwards;
+            opacity: 0;
         }
 
         /* --- TOMBOL KONTAK --- */
         .cta-button {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 12px 30px;
-            background:#ffff;
+            background: var(--text-white);
             color: var(--neon-purple);
             border: 2px solid var(--neon-purple);
             border-radius: 50px;
@@ -105,16 +173,150 @@
             text-transform: uppercase;
             font-size: 0.8rem;
             cursor: pointer;
+            
+            /* Animasi */
+            animation: fadeInUp 1s ease 0.8s forwards;
+            opacity: 0;
         }
 
-        /* Efek Hover Tombol (Jadi terang penuh) */
-        .btn:hover {
+        .cta-button:hover {
+            background: var(--neon-purple);
+            color: white !important;
+            box-shadow: 0 0 20px var(--neon-purple);
+            transform: scale(1.05);
+        }
+
+        /* --- SOSIAL MEDIA LINKS --- */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            
+            /* Animasi */
+            animation: fadeInUp 1s ease 0.9s forwards;
+            opacity: 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 2px solid var(--neon-purple);
+            color: var(--neon-purple);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
             background: var(--neon-purple);
             color: white;
-            box-shadow: 0 0 20px var(--neon-purple);
+            box-shadow: 0 0 15px var(--neon-purple);
+            transform: translateY(-5px);
         }
 
-        /* --- MEDIA QUERY (Responsif HP) --- */
+        /* --- SKILL CARDS --- */
+        .skills-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+            
+            /* Animasi */
+            animation: fadeInUp 1s ease 1s forwards;
+            opacity: 0;
+        }
+
+        .skills-title {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--neon-purple);
+            border-radius: 20px;
+            color: var(--neon-purple);
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        /* --- HIT COUNTER --- */
+        .hit-counter {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: var(--bg-color);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            
+            /* Animasi */
+            animation: fadeInUp 1s ease 1.1s forwards;
+            opacity: 0;
+        }
+
+        .hit-counter span {
+            color: var(--neon-purple);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .hit-counter p {
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            margin-top: 5px;
+        }
+
+        /* --- TOMBOL DARK/LIGHT TOGGLE --- */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--neon-purple);
+            color: var(--neon-purple);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            background: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 15px var(--neon-purple);
+            transform: rotate(360deg);
+        }
+
+        /* --- RESPONSIF --- */
         @media (max-width: 400px) {
             .container {
                 padding: 30px 20px;
@@ -122,14 +324,22 @@
             h1 {
                 font-size: 1.5rem;
             }
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Tombol Toggle Dark/Light Mode -->
+    <button class="theme-toggle" id="themeToggle" title="Ganti Tema">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <div class="container">
         <div class="profile-img-container">
-            <!--https://files.catbox.moe/iwolzq.jpg-->
             <img src="https://files.catbox.moe/iwolzq.jpg" alt="Foto Profil" class="profile-img">
         </div>
 
@@ -137,11 +347,110 @@
         <p class="tagline">Web Designer</p>
 
         <p class="bio">
-            Halo! Saya adalah xyzoskibidi programer baru jika kalian membutuhkan bantua saya bisa tap button di bawah </p>
+            Halo! Saya adalah xyzoskibidi programer baru jika kalian membutuhkan bantuan saya bisa tap button di bawah
+        </p>
 
-        <!-- https://wa.me/+584261152829-->
-        <a href="https://wa.me/+584261152829" class="cta-button"><i class=fas "fa-phone"></i>chat me</a>
+        <!-- Tombol WhatsApp -->
+        <a href="https://wa.me/+584261152829" class="cta-button">
+            <i class="fab fa-whatsapp"></i> Chat Me
+        </a>
+
+        <!-- Sosial Media Links -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/grizz_what_is_it?igsh=M2x0Y256em0zNmJn" class="social-link" title="Instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://github.com/EgiTechsolutions" class="social-link" title="GitHub" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/xyzo" class="social-link" title="LinkedIn" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://twitter.com/xyzo" class="social-link" title="Twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills-section">
+            <p class="skills-title">Keahlian</p>
+            <div class="skills-container">
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">UI/UX</span>
+                <span class="skill-tag">Figma</span>
+            </div>
+        </div>
+
+        <!-- Hit Counter -->
+        <div class="hit-counter">
+            <p>PENGUNJUNG</p>
+            <span id="visitorCount">0</span>
+            <p>orang telah mengunjungi</p>
+        </div>
     </div>
 
+    <script>
+        // --- DARK/LIGHT TOGGLE ---
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // Cek tema tersimpan
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        }
+
+        function updateIcon(theme) {
+            if (theme === 'light') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme === 'dark' ? 'light' : 'light');
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        // --- HIT COUNTER (LocalStorage) ---
+        let visitors = localStorage.getItem('visitorCount');
+        
+        if (!visitors) {
+            visitors = 1;
+        } else {
+            visitors = parseInt(visitors) + 1;
+        }
+        
+        localStorage.setItem('visitorCount', visitors);
+        document.getElementById('visitorCount').textContent = visitors;
+
+        // --- ANIMASI SAAT GULIR (Opsional) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        });
+
+        document.querySelectorAll('.container, .social-links, .skills-section, .hit-counter').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
