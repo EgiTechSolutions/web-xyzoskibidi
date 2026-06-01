@@ -1,620 +1,148 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Store Xyzo</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya - Neon Dark</title>
+    <!-- Mengambil font dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET DASAR --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        /* --- VARIABEL WARNA --- */
+        :root {
+            --bg-color: #0a0a0a;         /* Latar belakang sangat gelap */
+            --card-bg: #121212;          /* Sedikit lebih terang dari bg */
+            --neon-purple: #d300ff;       /* Warna Ungu Neon Utama */
+            --neon-glow: #a500c7;        /* Warna glow lebih gelap */
+            --text-white: #f0f0f0;       /* Putih bersih untuk teks */
+            --text-gray: #aaaaaa;        /* Abu-abu untuk teks sekunder */
+        }
 
-:root{
---bg-primary:#0a0a0a;
---bg-secondary:#55A3FF;
---glass-bg:rgba(255,255,255,.05);
---glass-border:rgba(255,255,255,.1);
---text-primary:#fff;
---text-secondary:#b0b0b0;
---accent:#00ff88;
---accent-hover:#00cc6a;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-body{
-font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));
-color:var(--text-primary);
-min-height:100dvh;
-overflow:hidden;
-position:relative;
-}
+        /* --- KARTU PROFIL --- */
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(211, 0, 255, 0.1); /* Efek bayangan-redup */
+            border: 1px solid #222;
+        }
 
-body::before{
-content:'';
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at 20% 50%,rgba(0,255,136,.1),transparent 50%),
-radial-gradient(circle at 80% 20%,rgba(255,255,255,.05),transparent 50%);
-animation:float 20s ease-in-out infinite;
-z-index:-1;
-}
+        /* --- FOTO PROFIL --- */
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
 
-@keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-20px)}
-}
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--neon-purple);
+            /* Efek Neon bersinar di sekitar foto */
+            box-shadow: 0 0 15px var(--neon-purple), 0 0 30px var(--neon-purple); 
+        }
 
-/* SIDEBAR */
-.sidebar{
-position:fixed;
-left:0;
-top:0;
-width:280px;
-height:100dvh;
-background:var(--glass-bg);
-backdrop-filter:blur(20px);
-border-right:1px solid var(--glass-border);
-padding:30px 0;
-z-index:1000;
-transition:.3s;
-}
+        /* --- TEKS --- */
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-.logo{
-padding:0 25px 35px;
-font-size:26px;
-font-weight:800;
-text-align:center;
-}
+        .tagline {
+            color: var(--neon-purple);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-purple); /* Efek text glow */
+        }
 
-.nav-menu{
-list-style:none;
-}
+        .bio {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
 
-.nav-item{
-padding:16px 28px;
-color:var(--text-secondary);
-display:flex;
-align-items:center;
-gap:15px;
-cursor:pointer;
-transition:.3s;
-border-left:3px solid transparent;
-font-style: oblique;nt-size:15px;
-}
+        /* --- TOMBOL KONTAK --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--neon-purple);
+            border: 2px solid var(--neon-purple);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
 
-.nav-item:hover,
-.nav-i  tem.active{
-color:#fff;
-background:rgba(255,255,255,.08);
-border-left-color:var(--accent);
-}
+        /* Efek Hover Tombol (Jadi terang penuh) */
+        .btn:hover {
+            background: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
 
-/* MAIN */
-.main-content{
-margin-left:280px;
-height:100dvh;
-display:flex;
-flex-direction:column;
-transition:.3s;
-}
-
-.header{
-padding:18px 35px;
-background:var(--glass-bg);
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:1px solid var(--glass-border);
-flex-wrap:wrap;
-gap:15px;
-}
-
-.page-title{
-font-size:28px;
-font-weight:700;
-text-transform:capitalize;
-}
-
-.header-actions{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:12px 20px;
-border:1px solid var(--glass-border);
-background:var(--glass-bg);
-color:#fff;
-border-radius:25px;
-cursor:pointer;
-transition:.3s;
-font-size:14px;
-}
-
-.btn:hover{
-transform:translateY(-2px);
-}
-
-.btn-primary{
-background:linear-gradient(135deg,var(--accent),var(--accent-hover));
-color:#000;
-border:none;
-font-weight:600;
-}
-
-/* CONTENT */
-.content-area{
-flex:1;
-padding:30px;
-overflow-y:auto;
-}
-
-.products-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
-
-.product-card{
-background:var(--glass-bg);
-border:1px solid var(--glass-border);
-border-radius:20px;
-padding:22px;
-cursor:pointer;
-transition:.3s;
-}
-
-.product-card:hover{
-transform:translateY(-8px);
-border-color:var(--accent);
-box-shadow:0 20px 40px rgba(0,255,136,.15);
-}
-
-.product-image{
-width:100%;
-height:180px;
-background:linear-gradient(135deg,#333,#555);
-border-radius:15px;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:50px;
-margin-bottom:18px;
-}
-
-.product-price{
-font-size:22px;
-font-weight:800;
-color:var(--accent);
-margin:8px 0;
-}
-
-/* AI CHAT */
-.ai-toggle{
-position:fixed;
-bottom:25px;
-right:25px;
-width:60px;
-height:60px;
-border:none;
-border-radius:50%;
-background:linear-gradient(135deg,var(--accent),var(--accent-hover));
-cursor:pointer;
-font-size:20px;
-z-index:1000;
-}
-
-.ai-widget{
-position:fixed;
-bottom:100px;
-right:25px;
-width:min(400px,95vw);
-height:min(520px,75vh);
-background:var(--glass-bg);
-border:1px solid var(--glass-border);
-border-radius:25px;
-display:none;
-flex-direction:column;
-backdrop-filter:blur(20px);
-z-index:999;
-}
-
-.ai-widget.active{
-display:flex;
-}
-
-.ai-header{
-padding:18px;
-border-bottom:1px solid var(--glass-border);
-font-weight:600;
-}
-
-.ai-chat-area{
-flex:1;
-padding:18px;
-overflow-y:auto;
-}
-
-.ai-message{
-padding:12px 15px;
-border-radius:16px;
-margin-bottom:12px;
-max-width:85%;
-font-size:14px;
-line-height:1.5;
-}
-
-.ai-message.user{
-background:rgba(0,255,136,.15);
-margin-left:auto;
-}
-
-.ai-message.ai{
-background:rgba(255,255,255,.08);
-}
-
-.ai-input{
-display:flex;
-gap:10px;
-padding:15px;
-border-top:1px solid var(--glass-border);
-}
-
-.ai-input input{
-flex:1;
-padding:12px;
-border:none;
-outline:none;
-border-radius:20px;
-background:rgba(255,255,255,.06);
-color:#fff;
-}
-
-/* FACE MODAL */
-.face-recognition{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:min(420px,92vw);
-padding:30px;
-background:var(--glass-bg);
-border:1px solid var(--glass-border);
-border-radius:25px;
-display:none;
-z-index:2000;
-text-align:center;
-backdrop-filter:blur(20px);
-}
-
-.face-recognition.active{
-display:block;
-}
-
-.face-video{
-height:180px;
-background:#222;
-border-radius:15px;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:45px;
-margin:20px 0;
-}
-
-/* TABLET */
-@media(max-width:992px){
-.sidebar{
-width:90px;
-}
-
-.logo{
-font-size:0;
-}
-
-.logo::after{
-content:'🛒';
-font-size:30px;
-}
-
-.nav-item{
-justify-content:center;
-padding:18px 0;
-}
-
-.nav-item span{
-display:none;
-}
-
-.main-content{
-margin-left:90px;
-}
-}
-
-/* MOBILE */
-@media(max-width:768px){
-
-.sidebar{
-width:100%;
-height:70px;
-bottom:0;
-top:auto;
-border-right:none;
-border-top:1px solid var(--glass-border);
-padding:0;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.logo{
-display:none;
-}
-
-.nav-menu{
-display:flex;
-width:100%;
-justify-content:space-around;
-}
-
-.nav-item{
-border:none;
-flex-direction:column;
-font-size:12px;
-gap:5px;
-padding:10px;
-}
-
-.main-content{
-margin-left:0;
-margin-bottom:70px;
-}
-
-.header{
-padding:15px 18px;
-}
-
-.page-title{
-font-size:22px;
-}
-
-.content-area{
-padding:18px;
-}
-
-.products-grid{
-grid-template-columns:1fr;
-gap:18px;
-}
-
-.ai-widget{
-right:2.5vw;
-bottom:90px;
-width:95vw;
-height:70vh;
-}
-
-.ai-toggle{
-bottom:85px;
-right:20px;
-}
-}
-</style>
+        /* --- MEDIA QUERY (Responsif HP) --- */
+        @media (max-width: 400px) {
+            .container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="sidebar">
-<div class="logo">🛒 AI Store Pro</div>
-<ul class="nav-menu">
-<li class="nav-item active" data-page="store"><i class="fas fa-store"></i> Store</li>
-<li class="nav-item" data-page="analytics"><i class="fas fa-chart-line"></i> Analytics</li>
-<li class="nav-item" data-page="owner"><i class="fas fa-user-shield"></i> Owner</li>
-</ul>
-</div>
+    <div class="container">
+        <div class="profile-img-container">
+            <!--https://files.catbox.moe/3kin5e.jpg-->
+            <img src="https://files.catbox.moe/3kin5e.jpg" alt="Foto Profil" class="profile-img">
+        </div>
 
-<div class="main-content">
-<div class="header">
-<div class="page-title" id="pageTitle">xyzoskibidi_Store</div>
-<div class="header-actions">
-<button class="btn" onclick="toggleAI()">AI Assistant</button>
-<button class="btn btn-primary" onclick="verifyOwner()">Owner Login</button>
-</div>
-</div>
+        <h1>Xyzo skibidi</h1>
+        <p class="tagline">Web Designer | Content Creator</p>
 
-<div class="content-area">
-<div id="storePage">
-<h1>Products</h1>
-<div class="products-grid" id="productsGrid"></div>
-</div>
+        <p class="bio">
+            Halo! Saya seorang kreator digital yang suka dengan estetika gelap dan futuristik. Selamat datang di portofolio sederhana saya.
+        </p>
 
-<div id="analyticsPage" style="display:none;">
-<h1>Analytics</h1>
-</div>
-
-<div id="ownerPage" style="display:none;">
-<h1>Owner Dashboard</h1>
-</div>
-</div>
-</div>
-
-<button class="ai-toggle" onclick="toggleAI()" id="aiToggle">
-<i class="fas fa-robot"></i>
-</button>
-
-<div class="ai-widget" id="aiWidget">
-<div class="ai-header">AI Assistant</div>
-<div class="ai-chat-area" id="aiChatArea">
-<div class="ai-message ai">Halo! Ada yang bisa saya bantu?</div>
-</div>
-<div class="ai-input">
-<input id="aiInput" onkeypress="handleAIEnter(event)">
-<button onclick="sendAI()">➤</button>
-</div>
-</div>
-
-<div class="face-recognition" id="faceModal">
-<h2>Owner Verification</h2>
-<div class="face-video"><i class="fas fa-video"></i></div>
-<div id="faceStatus">Memindai wajah...</div>
-<button class="btn" onclick="closeFaceModal()">Batal</button>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-generateProducts();
-setupNavigation();
-});
-
-function setupNavigation(){
-document.querySelectorAll(".nav-item").forEach(item=>{
-item.onclick=()=>switchPage(item.dataset.page);
-});
-}
-
-function switchPage(page){
-
-document.querySelectorAll(".nav-item")
-.forEach(i=>i.classList.remove("active"));
-
-document.querySelector(`[data-page="${page}"]`)
-.classList.add("active");
-
-["store","analytics","owner"].forEach(p=>{
-document.getElementById(p+"Page").style.display="none";
-});
-
-document.getElementById(page+"Page").style.display="block";
-
-document.getElementById("pageTitle").textContent = page;
-
-}
-
-function generateProducts(){
-
-const products = [
-{name:"iPhone 15",price:"Rp24jt",stock:5,icon:"📱"},
-{name:"Macbook M3",price:"Rp32jt",stock:3,icon:"💻"},
-{name:"Airpods",price:"Rp4jt",stock:8,icon:"🎧"}
-];
-
-const grid=document.getElementById("productsGrid");
-
-grid.innerHTML="by.xyzoskibidi";
-
-products.forEach(p=>{
-
-let card=document.createElement("div");
-
-card.className="product-card";
-
-card.innerHTML=`
-<div class="product-image">${p.icon}</div>
-<h3>${p.name}</h3>
-<div class="product-price">${p.price}</div>
-<p>Stock: ${p.stock}</p>
-`;
-
-grid.appendChild(card);
-
-});
-
-}
-
-function toggleAI(){
-
-document.getElementById("aiWidget")
-.classList.toggle("active");
-
-}
-
-async function sendAI(){
-
-const input = document.getElementById("aiInput");
-const chat = document.getElementById("aiChatArea");
-
-const message = input.value.trim();
-
-if(!message) return;
-
-chat.innerHTML += `
-<div class="ai-message user">
-${message}
-</div>
-`;
-
-input.value="";
-
-chat.innerHTML += `
-<div class="ai-message ai" id="loading">
-Mengetik...
-</div>
-`;
-
-chat.scrollTop = chat.scrollHeight;
-
-try{
-
-const res = await fetch(
-"https://api.siputzx.my.id/api/ai/glm47flash?prompt=" + encodeURIComponent(message)
-);
-
-const data = await res.json();
-
-document.getElementById("loading").remove();
-
-chat.innerHTML += `
-<div class="ai-message ai">
-${data?.data?.response || "Tidak ada respon"}
-</div>
-`;
-
-chat.scrollTop = chat.scrollHeight;
-
-}catch(e){
-
-document.getElementById("loading").remove();
-
-chat.innerHTML += `
-<div class="ai-message ai">
-API error / tidak bisa diakses
-</div>
-`;
-
-console.log(e);
-
-}
-
-}
-
-function handleAIEnter(e){
-
-if(e.key === "Enter"){
-sendAI();
-}
-
-}
-
-function verifyOwner(){
-
-document.getElementById("faceModal")
-.classList.add("active");
-
-}
-
-function closeFaceModal(){
-
-document.getElementById("faceModal")
-.classList.remove("active");
-
-}
-</script>
+        <!-- https://wa.me/+584261152829-->
+        <a href="tel:+584261152829" class="btn">Hubungi Saya</a>
+    </div>
 
 </body>
 </html>
